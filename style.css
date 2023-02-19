@@ -37,6 +37,7 @@ body {
   font-size: 16px;
   border: 1px solid #414141;
   border-radius: 4px;
+  caret-color: #00447c;
 }
 
 .dropdown-select {
@@ -58,6 +59,19 @@ body {
 
 .dropdown-select-option:not(:last-child) {
   border-bottom: 1px solid #e7e7e7;
+}
+
+.selected {
+    color: #00447c;
+    font-weight: bold;
+}
+
+.main__form-box-error {
+    margin: 0;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #b30000;
+    display: none;
 }
 
 .main__form-button-password,
