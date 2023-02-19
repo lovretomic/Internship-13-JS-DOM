@@ -15,11 +15,13 @@ const dropdownStatus = {
 
 const inputs = document.querySelectorAll('.main__form-box-input');
 const labels = document.querySelectorAll('.main__form-box-label');
+const errors = document.querySelectorAll('.main__form-box-error');
 for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener('focus', () => {
         inputs[i].style.border = `1px solid ${COLOR_BLUE_1}`;
         inputs[i].style.outline = 'none';
         labels[i].style.color = COLOR_BLUE_1;
+        removeError(i);
     })
 
     inputs[i].addEventListener('blur', () => {
@@ -75,4 +77,32 @@ for (let i = 0; i < dropdownOptions.length; i++) {
 for (let i = 0; i < dropdownInputs.length; i++) {
     dropdownInputs[i].addEventListener('focus', () => toggleDropdown(i));
     dropdownInputs[i].addEventListener('blur', () => toggleDropdown(i));
+}
+
+document.querySelector('.main__form-button-changes').addEventListener('click', (e) => {
+    e.preventDefault();
+    const formData = {
+        firstName: null,
+        lastName: null,
+        level: null,
+        duration: null
+    }
+    let formDataKeys = Object.keys(formData);
+    for (let i = 0; i < inputs.length; i++) {
+        let inputValue = inputs[i].value;
+        if (inputValue) formData[formDataKeys[i]] = inputValue;
+        else setError(i);
+    }
+
+    for (data in formData) if (!formData[data]) return;
+    localStorage.setItem('data', JSON.stringify(formData));
+})
+
+function setError(index) {
+    inputs[index].style.border = `1px solid ${COLOR_RED}`;
+    errors[index].style.display = 'block';
+}
+
+function removeError(index) {
+    errors[index].style.display = 'none';
 }
