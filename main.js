@@ -40,6 +40,7 @@ for (let i = 0; i < inputs.length; i++) {
 
     inputs[i].addEventListener('blur', () => {
         if (!inputs[i].value) inputs[i].style.border = '1px solid black';
+        if (!inputs[i].value) inputs[i].style.background = 'white';
         labels[i].style.color = COLOR_GREY;
     })
 
@@ -112,7 +113,11 @@ document.querySelector('.main__form-button-changes').addEventListener('click', (
 
     for (data in formData) if (!formData[data]) return;
     localStorage.setItem('data', JSON.stringify(formData));
-    alert('Changes saved!')
+    alert('Changes saved!');
+})
+
+document.querySelector('.main__form-button-password').addEventListener('click', (e) => {
+    e.preventDefault();
 })
 
 function setError(index) {
