@@ -53,6 +53,7 @@ body {
 .dropdown-select-option {
   margin: 0;
   padding: 15px 20px;
+  cursor: pointer;
 }
 
 .dropdown-select-option:not(:last-child) {
