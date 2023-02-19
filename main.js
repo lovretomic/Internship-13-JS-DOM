@@ -4,18 +4,32 @@ const COLOR_BLUE_2 = '#00447c';
 const COLOR_BLUE_3 = '#f5fafe';
 const COLOR_GREY = '#414141';
 
+const labels = document.querySelectorAll('.main__form-box-label');
+const inputs = document.querySelectorAll('.main__form-box-input');
+const errors = document.querySelectorAll('.main__form-box-error');
+
 const dropdownInputs = document.querySelectorAll('.main__form-box-input.dropdown');
+const dropdownArrows = document.querySelectorAll('.main__form-box-arrow');
 const dropdowns = document.querySelectorAll('.main__form-box-input ~ div');
 const dropdownOptions = document.querySelectorAll('.dropdown-select-option');
+
+if (localStorage.getItem('data')) {
+    const storageData = JSON.parse(localStorage.getItem('data'));
+    let i = 0;
+    for (data in storageData) {
+        inputs[i++].value = storageData[data];
+    }
+}
+else {
+    dropdownInputs[0].value = dropdownOptions[0].innerHTML;
+    dropdownInputs[1].value = dropdownOptions[3].innerHTML;
+}
 
 const dropdownStatus = {
   level: false,
   duration: false,
 };
 
-const inputs = document.querySelectorAll('.main__form-box-input');
-const labels = document.querySelectorAll('.main__form-box-label');
-const errors = document.querySelectorAll('.main__form-box-error');
 for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener('focus', () => {
         inputs[i].style.border = `1px solid ${COLOR_BLUE_1}`;
@@ -42,9 +56,11 @@ function toggleDropdown(index) {
   let keys = Object.keys(dropdownStatus);
   if (dropdownStatus[keys[index]] === false) {
     dropdowns[index].style.display = 'block';
+    dropdownArrows[index].style.transform = 'rotateZ(180deg)';
     dropdownStatus[keys[index]] = true;
   } else {
     dropdowns[index].style.display = 'none';
+    dropdownArrows[index].style.transform = 'rotateZ(0deg)';
     dropdownStatus[keys[index]] = false;
   }
 }
@@ -96,6 +112,7 @@ document.querySelector('.main__form-button-changes').addEventListener('click', (
 
     for (data in formData) if (!formData[data]) return;
     localStorage.setItem('data', JSON.stringify(formData));
+    alert('Changes saved!')
 })
 
 function setError(index) {

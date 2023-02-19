@@ -40,6 +40,14 @@ body {
   caret-color: #00447c;
 }
 
+.main__form-box-arrow {
+  height: 15px;
+  position: absolute;
+  right: 15px;
+  top: 30px;
+  transition: 200ms;
+}
+
 .dropdown-select {
   display: none;
   width: 100%;
